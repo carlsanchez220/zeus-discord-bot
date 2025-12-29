@@ -25,6 +25,7 @@ async def on_ready():
 async def baddies(ctx):
     await ctx.send("@everyone **baddie baddie shot o clock** 🔥")
 
+# ✅ COMMAND: !postbaddies
 @bot.command()
 async def postbaddies(ctx):
     embed = discord.Embed(
@@ -79,6 +80,7 @@ async def sunday_announcement():
         await asyncio.sleep(604800)
 
 bot.run(TOKEN)
+
 
 
 
