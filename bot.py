@@ -4,8 +4,29 @@ import asyncio
 from datetime import datetime, timedelta
 import pytz
 from discord.ext import commands
+from threading import Thread
+from flask import Flask
 
-TOKEN = os.getenv("TOKEN")
+# ----------------------
+# Flask web server setup
+# ----------------------
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+def run_webserver():
+    # Use port 8080 (common for Replit or similar hosting)
+    app.run(host='0.0.0.0', port=8080)
+
+# Start web server in a background thread
+Thread(target=run_webserver).start()
+
+# ----------------------
+# Discord bot setup
+# ----------------------
+TOKEN = os.getenv("Token")
 CHANNEL_ID = 1455030674946789376
 SEASON_IMAGE_URL = "https://cdn.discordapp.com/attachments/1455030580185141261/1455175846519111701/baddies.PNG?ex=6953c59d&is=6952741d&hm=dd52300618d267de8c51c64a1d4951ac56db4aeb6d9cd7e9d0937984612f4a87&"
 
@@ -33,15 +54,13 @@ async def postbaddies(ctx):
         description=(
             "**A new episode just dropped on Zeus Network** 🔥\n\n"
             "👀 Don’t miss it\n"
-            "📺 Watch now on Zeus\n"
-            "Click here www.thezeusnetwork.com and enjoy!"
+            "📺 Watch now on Zeus Network\n"
+            "Click here www.thezeusnetwork.com and enjoy!"                                  
         ),
         color=0xff0055
     )
-
     embed.set_image(url=SEASON_IMAGE_URL)
     embed.set_footer(text="Zeus Network • Sundays")
-
     await ctx.send("@everyone", embed=embed)
 
 # ✅ SUNDAY POST
@@ -50,7 +69,6 @@ async def sunday_announcement():
 
     while not bot.is_closed():
         now = datetime.now(cst)
-
         days_ahead = (6 - now.weekday()) % 7
         next_sunday = now + timedelta(days=days_ahead)
         target_time = next_sunday.replace(hour=17, minute=0, second=0, microsecond=0)
@@ -68,23 +86,15 @@ async def sunday_announcement():
             description=(
                 "**A new episode just dropped on Zeus Network** 🔥\n\n"
                 "👀 Don’t miss it\n"
-                "📺 Watch now on Zeus"
+                "📺 Watch now on Zeus\n"
+                "Click here www.thezeusnetwork.com and enjoy!"                            
             ),
             color=0xff0055
         )
-
         embed.set_image(url=SEASON_IMAGE_URL)
         embed.set_footer(text="Zeus Network • Sundays")
-
         await channel.send("@everyone", embed=embed)
 
-        await asyncio.sleep(604800)
+        await asyncio.sleep(604800)  # wait 7 days until next Sunday
 
 bot.run(TOKEN)
-
-
-
-
-
-
-
