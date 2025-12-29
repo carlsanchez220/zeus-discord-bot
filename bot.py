@@ -1,10 +1,11 @@
+import os
 import discord
 import asyncio
 from datetime import datetime, timedelta
 import pytz
 from discord.ext import commands
 
-TOKEN = "MTQ1NTE2MTM0NzczMzE5Njk0NA.GEuT01._jk2a4wtkDXxFmdcUdDA_0ePasLqLuJzQIWPmw"
+TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = 1455030674946789376
 SEASON_IMAGE_URL = "https://cdn.discordapp.com/attachments/1455030580185141261/1455175846519111701/baddies.PNG?ex=6953c59d&is=6952741d&hm=dd52300618d267de8c51c64a1d4951ac56db4aeb6d9cd7e9d0937984612f4a87&"
 
@@ -61,5 +62,6 @@ async def sunday_announcement():
         await asyncio.sleep(604800)
 
 bot.run(TOKEN)
+
 
 
