@@ -25,6 +25,23 @@ async def on_ready():
 async def baddies(ctx):
     await ctx.send("@everyone **baddie baddie shot o clock** 🔥")
 
+@bot.command()
+async def postbaddies(ctx):
+    embed = discord.Embed(
+        title="🚨 NEW BADDIES EPISODE OUT NOW 🚨",
+        description=(
+            "**A new episode just dropped on Zeus Network** 🔥\n\n"
+            "👀 Don’t miss it\n"
+            "📺 Watch now on Zeus"
+        ),
+        color=0xff0055
+    )
+
+    embed.set_image(url=SEASON_IMAGE_URL)
+    embed.set_footer(text="Zeus Network • Sundays")
+
+    await ctx.send("@everyone", embed=embed)
+
 # ✅ SUNDAY POST
 async def sunday_announcement():
     await bot.wait_until_ready()
@@ -62,6 +79,7 @@ async def sunday_announcement():
         await asyncio.sleep(604800)
 
 bot.run(TOKEN)
+
 
 
 
