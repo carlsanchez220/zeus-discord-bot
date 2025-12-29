@@ -33,7 +33,7 @@ async def postbaddies(ctx):
         description=(
             "**A new episode just dropped on Zeus Network** 🔥\n\n"
             "👀 Don’t miss it\n"
-            "📺 Watch now on Zeus"
+            "📺 Watch now on Zeus\n"
             "Click here www.thezeusnetwork.com and enjoy!"
         ),
         color=0xff0055
@@ -81,6 +81,7 @@ async def sunday_announcement():
         await asyncio.sleep(604800)
 
 bot.run(TOKEN)
+
 
 
 
